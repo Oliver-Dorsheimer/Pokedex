@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+
+    --color-background-tint1: rgba(26,34,43,1);
+    --color-background-tint2: rgba(37,48,58,1);
+    --color-background: rgba(15, 23, 32, 1);
+    --color-background-shade1: rgba(12,18,24,1);
+    --color-background-shade2: rgba(7,9,12,1);
+
+    --color-primary-tint1: rgba(74,143,214,1);
+    --color-primary-tint2: rgba(127,184,234,1);
+    --color-primary: rgba(23, 96, 179, 1);
+    --color-primary-shade1: rgba(20,84,154,1);
+    --color-primary-shade2: rgba(15,65,118,1);
+
+    --color-secondary-tint1: rgba(127,102,255,1);
+    --color-secondary-tint2: rgba(166,153,255,1);
+    --color-secondary: rgba(90, 59, 255, 1);
+    --color-secondary-shade1: rgba(78,51,230,1);
+    --color-secondary-shade2: rgba(59,39,179,1);
+
+    --color-accent-tint1: rgba(255,204,51,1);
+    --color-accent-tint2: rgba(255,223,102,1);
+    --color-accent: rgba(255, 184, 0, 1);
+    --color-accent-shade1: rgba(230,161,0,1);
+    --color-accent-shade2: rgba(179,125,0,1);
+
+    --color-warning: rgba(255, 90, 26, 1);
+    --color-sucess: rgba(62, 163, 74, 1);
+    --color-text-neutral: rgba(230, 230, 230, 1);
+    --color-cards: rgba(17, 24, 39, 1);
+}
+
+@font-face{
+    font-family: "palanquin";
+    src: url();
+}
+
+h1{
+    color: var(--color-text-neutral);
+}
+
+h2{
+    text-align: center;
+    margin-top: 15%;
+}

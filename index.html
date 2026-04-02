@@ -2,14 +2,33 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=#, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/color_and_text.css">
     <link rel="stylesheet" href="style.css">
     <script defer src="scripts/db.js"></script>
     <script defer src="scripts/templates.js"></script>
     <script defer src="script.js"></script>
     <title>Pokedex - Das Krasse !</title>
 </head>
-<body>
+<body onload = "init()">
+    <header>
+        <div class = "header_content content_limitation margin-side">
+            <div class = "header_content_left">
+                <img src="assets/icon/pokeball_icon.png">
+                <h1>Pokedex</h1>
+            </div>
+            <input id = "header_searchbar">
+        </div>
+    </header>
+    <main>
+        <div class = "main_content content_limitation">
+            <section id = "section_pokemon_overview">
+
+                
+            </section>
+            <button id = "pokemon_overview_button_load_more" onclick = "myconsole()">load more pokemon</button>
+        </div>
+    </main>
     
 </body>
 </html>
