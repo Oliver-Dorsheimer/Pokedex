@@ -19,10 +19,17 @@ let loadingBatchSize = 4;
 async function init(){
     await setAllPokemonMetaData();
     await getPokemonDetailsDataBatch();
+    setSmallCardBackground(0);
     console.log(allPokemonMetaData);
     console.log(allPokemonDetailData);
-    console.log(renderingSection);
     renderPokemonOverview();
+};
+
+function setSmallCardBackground(index){
+    for (let i = 0; i < renderingBatchSize; i++){
+        let getType = allPokemonDetailData[i].types[0].type["name"]
+        console.log(getType);
+    };
 };
 
 //#region Rendering
@@ -84,7 +91,7 @@ async function getPokemonDetailData(index){
 //#endregion
 
 
-/*
+/*document.getElementById("article_overview_card").setAttribute("style", index)
 try {
         let globalIndex = renderingBatchSize * renderingSection;
         let promises = [];

@@ -33,6 +33,96 @@
     --color-sucess: rgba(62, 163, 74, 1);
     --color-text-neutral: rgba(230, 230, 230, 1);
     --color-cards: rgba(17, 24, 39, 1);
+
+    --color-normal-base: rgba(168,168,160,1);
+    --color-normal-tint: rgba(168,168,160,0.12);
+    --color-normal-shadow: rgba(80,80,72,0.36);
+    --color-normal-accent: rgba(230,230,224,1);
+
+    --color-feuer-base: rgba(220,80,24,1);
+    --color-feuer-tint: rgba(220,80,24,0.14);
+    --color-feuer-shadow: rgba(120,30,10,0.36);
+    --color-feuer-accent: rgba(255,180,60,1);
+
+    --color-wasser-base: rgba(24,140,220,1);
+    --color-wasser-tint: rgba(24,140,220,0.14);
+    --color-wasser-shadow: rgba(8,60,100,0.36);
+    --color-wasser-accent: rgba(150,230,255,1);
+
+    --color-elektro-base: rgba(0,200,255,1);
+    --color-elektro-tint: rgba(0,200,255,0.14);
+    --color-elektro-shadow: rgba(0,90,110,0.36);
+    --color-elektro-accent: rgba(255,250,120,1);
+
+    --color-gras-base: rgba(46,139,87,1);
+    --color-gras-tint: rgba(46,139,87,0.14);
+    --color-gras-shadow: rgba(18,60,36,0.36);
+    --color-gras-accent: rgba(190,255,140,1);
+
+    --color-eis-base: rgba(190,234,247,1);
+    --color-eis-tint: rgba(190,234,247,0.14);
+    --color-eis-shadow: rgba(70,110,130,0.36);
+    --color-eis-accent: rgba(230,250,255,1);
+
+    --color-kampf-base: rgba(200,40,40,1);
+    --color-kampf-tint: rgba(200,40,40,0.14);
+    --color-kampf-shadow: rgba(90,20,20,0.36);
+    --color-kampf-accent: rgba(255,210,130,1);
+
+    --color-gift-base: rgba(120,200,70,1);
+    --color-gift-tint: rgba(120,200,70,0.14);
+    --color-gift-shadow: rgba(40,80,30,0.36);
+    --color-gift-accent: rgba(170,255,100,1);
+
+    --color-boden-base: rgba(139,90,43,1);
+    --color-boden-tint: rgba(139,90,43,0.14);
+    --color-boden-shadow: rgba(60,38,18,0.36);
+    --color-boden-accent: rgba(230,200,150,1);
+
+    --color-flug-base: rgba(135,206,235,1);
+    --color-flug-tint: rgba(135,206,235,0.14);
+    --color-flug-shadow: rgba(60,90,110,0.36);
+    --color-flug-accent: rgba(255,220,180,1);
+
+    --color-psycho-base: rgba(220,120,200,1);
+    --color-psycho-tint: rgba(220,120,200,0.14);
+    --color-psycho-shadow: rgba(110,50,90,0.36);
+    --color-psycho-accent: rgba(255,200,240,1);
+
+    --color-kaefer-base: rgba(120,180,40,1);
+    --color-kaefer-tint: rgba(120,180,40,0.14);
+    --color-kaefer-shadow: rgba(40,70,20,0.36);
+    --color-kaefer-accent: rgba(220,255,130,1);
+
+    --color-gestein-base: rgba(130,110,90,1);
+    --color-gestein-tint: rgba(130,110,90,0.14);
+    --color-gestein-shadow: rgba(50,40,30,0.36);
+    --color-gestein-accent: rgba(200,180,150,1);
+
+    --color-geist-base: rgba(90,60,140,1);
+    --color-geist-tint: rgba(90,60,140,0.14);
+    --color-geist-shadow: rgba(30,20,60,0.36);
+    --color-geist-accent: rgba(180,160,255,1);
+
+    --color-drache-base: rgba(50,110,220,1);
+    --color-drache-tint: rgba(50,110,220,0.14);
+    --color-drache-shadow: rgba(12,44,90,0.36);
+    --color-drache-accent: rgba(170,200,255,1);
+
+    --color-unlicht-base: rgba(40,40,60,1);
+    --color-unlicht-tint: rgba(40,40,60,0.14);
+    --color-unlicht-shadow: rgba(10,10,20,0.36);
+    --color-unlicht-accent: rgba(150,150,180,1);
+
+    --color-stahl-base: rgba(160,170,180,1);
+    --color-stahl-tint: rgba(160,170,180,0.14);
+    --color-stahl-shadow: rgba(70,75,80,0.36);
+    --color-stahl-accent: rgba(220,230,240,1);
+
+    --color-fee-base: rgba(255,170,230,1);
+    --color-fee-tint: rgba(255,170,230,0.14);
+    --color-fee-shadow: rgba(110,60,100,0.36);
+    --color-fee-accent: rgba(255,240,200,1);
 }
 
 @font-face{

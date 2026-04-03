@@ -1,7 +1,7 @@
 function pokemonOverviewCardTemplate(index){
-    return `<article class = "article_overview_card">
+    return `<article id = "article_overview_card">
     <div class = "overview_card_image_container">
-        <img class = "overview_card_image" src = "assets/icon/pokeball_icon.png">
+        <img class = "overview_card_image" src = "${allPokemonDetailData[index].sprites.other['official-artwork'].front_default}">
     </div>
     <div class = "overview_card_head_info">
     <p>ID:${allPokemonDetailData[index].id}</p>
@@ -11,3 +11,5 @@ function pokemonOverviewCardTemplate(index){
 
     </article>
 `};
+
+/**/
