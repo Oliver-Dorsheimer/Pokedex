@@ -1,11 +1,13 @@
 //#region variables
-let allPokemonMetaData = [];
-let allPokemonDetailData = [];
+let allPokemonMetaData = new Array(1350).fill(null);
+let allPokemonDetailData = new Array(1350).fill(null);
 
-let PokemondatailDataChache = [];
+let PokemondatailDataChache = new Array(20).fill(null);
 
 let renderingBatchSize = 20;
 let renderingSection = 0;
+let loadingSection = 0;
+let loadingBatchSize = 4;
 
 //#endregion
 //#region Main
@@ -15,16 +17,15 @@ let renderingSection = 0;
 //#region Functions
 
 async function init(){
-    await getPokemonDetailData("https://pokeapi.co/api/v2/pokemon/1");
     await setAllPokemonMetaData();
-    renderPokemonOverview();
+    await getPokemonDetailsDataBatch();
     console.log(allPokemonMetaData);
-    
+    console.log(allPokemonDetailData);
+    console.log(renderingSection);
+    renderPokemonOverview();
 };
 
-function myconsole(){
-    console.log(allPokemonDetailData);
-};
+//#region Rendering
 
 function renderPokemonOverview(){
     for (let i = 0; i < renderingBatchSize; i++){
@@ -41,25 +42,9 @@ function getPokemonName(index){
     return name.toUpperCase();
 };
 
-async function getPokemonDetailsDataBatch(){
-    try {
-        let allPokemonDetailData =  await fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${renderingBatchSize * renderingSection}&limit=${renderingBatchSize}`);
-        let allPokemonDetailDataJSON =  await allPokemonData.json();
-        allPokemonDetailData += allPokemonMetaDataJSON;
-    } catch (error) {
-       console.warn("HILFE ICH BIN IN GEFAHR ! DER SERVER ANTWORTET NICHT HILFE !");
-    };
-};
 
-async function getPokemonDetailData(url){
-    try {
-        let allPokemonDetailData =  await fetch(`${url}`);
-        let allPokemonDetailDataJSON =  await allPokemonData.json();
-        allPokemonDetailData +=allPokemonDetailDataJSON;
-    } catch (error) {
-       
-    };
-};
+//#endregion
+//#region API Calls
 
 async function setAllPokemonMetaData(){
     try {
@@ -71,4 +56,50 @@ async function setAllPokemonMetaData(){
     };
 };
 
-//#region Functions
+async function getPokemonDetailsDataBatch(){
+    try {
+        let globalIndex = renderingBatchSize * renderingSection;
+        let promises = [];
+        for (let i = 0; i < renderingBatchSize; i++){
+            promises.push(getPokemonDetailData(globalIndex + i));
+        };
+        await Promise.allSettled(promises);
+        loadingSection++
+    } catch (error) {
+       console.warn("Pokemon Datails Data could not be loaded !");
+    };
+};
+
+async function getPokemonDetailData(index){
+    try {
+        let allPokemonDetails =  await fetch(allPokemonMetaData.results[index].url);
+        let allPokemonDetailDataJSON =  await allPokemonDetails.json();
+        allPokemonDetailData[index] = allPokemonDetailDataJSON;
+    } catch (error) {
+       
+    };
+};
+
+//#endregion
+//#endregion
+
+
+/*
+try {
+        let globalIndex = renderingBatchSize * renderingSection;
+        let promises = [];
+        for (let i = 0; i < renderingBatchSize/loadingBatchSize; i++){
+            await Promise.allSettled([getPokemonDetailData(globalIndex), getPokemonDetailData(globalIndex + 1), getPokemonDetailData(globalIndex + 2), getPokemonDetailData(globalIndex + 3)]);
+            globalIndex = globalIndex + loadingBatchSize;
+        };
+        if(renderingBatchSize%loadingBatchSize >= 0){
+            for (let i = 0; i < renderingBatchSize/loadingBatchSize; i++){
+            const globalIndex = renderingBatchSize * renderingSection + i;
+            await getPokemonDetailData(globalIndex);
+            };
+        };
+        loadingSection++
+    } catch (error) {
+       console.warn("Pokemon Datails Data could not be loaded !");
+    };
+*/

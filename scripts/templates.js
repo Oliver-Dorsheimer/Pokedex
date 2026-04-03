@@ -4,10 +4,10 @@ function pokemonOverviewCardTemplate(index){
         <img class = "overview_card_image" src = "assets/icon/pokeball_icon.png">
     </div>
     <div class = "overview_card_head_info">
-    <p>ID</p>
+    <p>ID:${allPokemonDetailData[index].id}</p>
     <p>Element</p>
     </div>
     <h2>${getPokemonName(index)}</h2>
 
     </article>
-    `};
+`};
