@@ -77,6 +77,7 @@ main {
     width: 300px;
     margin-bottom: 128px;
 
+    transition-duration: 300ms;
     border-style: solid;
     border-width: 3px;
     border-color: var(--color-secondary-shade2);
@@ -86,13 +87,13 @@ main {
 
 #article_overview_card:hover{
     transition-duration: 150ms;
-    transition-timing-function: ease;
-    transform: scale(1.2);
+    transition-timing-function: ease-in-out;
+    transform: scale(1.1);
 }
 
 .overview_card_image_container{
     position: absolute;
-    top: calc(-84px);
+    top: calc(-84px * 1.4);
     left: calc(50% - 84px);
     transform: rotate(45deg);
     display: flex;
@@ -106,12 +107,13 @@ main {
 }
 
 .overview_card_image{
-    transition-duration: 150ms;
-    transition-timing-function: ease-out;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in;
     transform: rotate(-45deg);
 }
 
 .overview_card_image:hover{
+    transition-duration: 150ms;
     transform: rotate(-45deg) scale(1.3);
 }
 

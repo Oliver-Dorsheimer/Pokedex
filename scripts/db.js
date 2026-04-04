@@ -1,122 +1,128 @@
-let types = [
+let typeColors = [
 {
     type: "normal",
-    tint1: "rgba(168,168,160,0.12)",
-    primary: "rgba(168,168,160,1)",
-    shadow: "rgba(80,80,72,0.36)"
+    tint: "--color-normal-tint",
+    primary: "--color-normal-base",
+    shadow: "--color-normal-shadow",
+    accent: "--color-normal-accent"
 },
 {
     type: "fire",
-    tint1: "rgba(220,80,24,0.14)",
-    primary: "rgba(220,80,24,1)",
-    shadow: "rgba(120,30,10,0.36)"
+    tint: "--color-feuer-tint",
+    primary: "--color-feuer-base",
+    shadow: "--color-feuer-shadow",
+    accent: "--color-feuer-accent"
 },
 {
     type: "water",
-    tint1: "rgba(24,140,220,0.14)",
-    primary: "rgba(24,140,220,1)",
-    shadow: "rgba(8,60,100,0.36)"
+    tint: "--color-wasser-tint",
+    primary: "--color-wasser-base",
+    shadow: "--color-wasser-shadow",
+    accent: "--color-wasser-accent"
 },
 {
     type: "electric",
-    tint1: "rgba(0,200,255,0.14)",
-    primary: "rgba(0,200,255,1)",
-    shadow: "rgba(0,90,110,0.36)"
+    tint: "--color-elektro-tint",
+    primary: "--color-elektro-base",
+    shadow: "--color-elektro-shadow",
+    accent: "--color-elektro-accent"
 },
 {
     type: "grass",
-    tint1: "rgba(46,139,87,0.14)",
-    primary: "rgba(46,139,87,1)",
-    shadow: "rgba(18,60,36,0.36)"
+    tint: "--color-gras-tint",
+    primary: "--color-gras-base",
+    shadow: "--color-gras-shadow",
+    accent: "--color-gras-accent"
 },
 {
     type: "ice",
-    tint1: "rgba(190,234,247,0.14)",
-    primary: "rgba(190,234,247,1)",
-    shadow: "rgba(70,110,130,0.36)"
+    tint: "--color-eis-tint",
+    primary: "--color-eis-base",
+    shadow: "--color-eis-shadow",
+    accent: "--color-eis-accent"
 },
 {
     type: "fighting",
-    tint1: "rgba(200,40,40,0.14)",
-    primary: "rgba(200,40,40,1)",
-    shadow: "rgba(90,20,20,0.36)"
+    tint: "--color-kampf-tint",
+    primary: "--color-kampf-base",
+    shadow: "--color-kampf-shadow",
+    accent: "--color-kampf-accent"
 },
 {
     type: "poison",
-    tint1: "rgba(120,200,70,0.14)",
-    primary: "rgba(120,200,70,1)",
-    shadow: "rgba(40,80,30,0.36)"
+    tint: "--color-gift-tint",
+    primary: "--color-gift-base",
+    shadow: "--color-gift-shadow",
+    accent: "--color-gift-accent"
 },
 {
     type: "ground",
-    tint1: "rgba(139,90,43,0.14)",
-    primary: "rgba(139,90,43,1)",
-    shadow: "rgba(60,38,18,0.36)"
+    tint: "--color-boden-tint",
+    primary: "--color-boden-base",
+    shadow: "--color-boden-shadow",
+    accent: "--color-boden-accent"
 },
 {
     type: "fly",
-    tint1: "rgba(135,206,235,0.14)",
-    primary: "rgba(135,206,235,1)",
-    shadow: "rgba(60,90,110,0.36)"
+    tint: "--color-flug-tint",
+    primary: "--color-flug-base",
+    shadow: "--color-flug-shadow",
+    accent: "--color-flug-accent"
 },
 {
     type: "psycho",
-    tint1: "rgba(220,120,200,0.14)",
-    primary: "rgba(220,120,200,1)",
-    shadow: "rgba(110,50,90,0.36)"
+    tint: "--color-psycho-tint",
+    primary: "--color-psycho-base",
+    shadow: "--color-psycho-shadow",
+    accent: "--color-psycho-accent"
 },
 {
     type: "bug",
-    tint1: "rgba(120,180,40,0.14)",
-    primary: "rgba(120,180,40,1)",
-    shadow: "rgba(40,70,20,0.36)"
+    tint: "--color-kaefer-tint",
+    primary: "--color-kaefer-base",
+    shadow: "--color-kaefer-shadow",
+    accent: "--color-kaefer-accent"
 },
 {
     type: "rock",
-    tint1: "rgba(130,110,90,0.14)",
-    primary: "rgba(130,110,90,1)",
-    shadow: "rgba(50,40,30,0.36)"
+    tint: "--color-gestein-tint",
+    primary: "--color-gestein-base",
+    shadow: "--color-gestein-shadow",
+    accent: "--color-gestein-accent"
 },
 {
     type: "ghost",
-    tint1: "rgba(90,60,140,0.14)",
-    primary: "rgba(90,60,140,1)",
-    shadow: "rgba(30,20,60,0.36)"
+    tint: "--color-geist-tint",
+    primary: "--color-geist-base",
+    shadow: "--color-geist-shadow",
+    accent: "--color-geist-accent"
 },
 {
     type: "dragon",
-    tint1: "rgba(50,110,220,0.14)",
-    primary: "rgba(50,110,220,1)",
-    shadow: "rgba(12,44,90,0.36)"
+    tint: "--color-drache-tint",
+    primary: "--color-drache-base",
+    shadow: "--color-drache-shadow",
+    accent: "--color-drache-accent"
 },
 {
     type: "dark",
-    tint1: "rgba(40,40,60,0.14)",
-    primary: "rgba(40,40,60,1)",
-    shadow: "rgba(10,10,20,0.36)"
+    tint: "--color-unlicht-tint",
+    primary: "--color-unlicht-base",
+    shadow: "--color-unlicht-shadow",
+    accent: "--color-unlicht-accent"
 },
 {
     type: "steel",
-    tint1: "rgba(160,170,180,0.14)",
-    primary: "rgba(160,170,180,1)",
-    shadow: "rgba(70,75,80,0.36)"
+    tint: "--color-stahl-tint",
+    primary: "--color-stahl-base",
+    shadow: "--color-stahl-shadow",
+    accent: "--color-stahl-accent"
 },
 {
     type: "fairy",
-    tint1: "rgba(255,170,230,0.14)",
-    primary: "rgba(255,170,230,1)",
-    shadow: "rgba(110,60,100,0.36)"
-},
-{
-    type: "stellar",
-    tint1: "rgba(88,50,200,0.14)",
-    primary: "rgba(88,50,200,1)",
-    shadow: "rgba(28,16,64,0.36)"
-},
-{
-    type: "unknown",
-    tint1: "rgba(120,120,140,0.14)",
-    primary: "rgba(120,120,140,1)",
-    shadow: "rgba(40,40,50,0.36)"
-},
+    tint: "--color-fee-tint",
+    primary: "--color-fee-base",
+    shadow: "--color-fee-shadow",
+    accent: "--color-fee-accent"
+}
 ]
