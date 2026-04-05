@@ -70,7 +70,7 @@ let typeColors = [
     accent: "--color-flug-accent"
 },
 {
-    type: "psycho",
+    type: "psychic",
     tint: "--color-psycho-tint",
     primary: "--color-psycho-base",
     shadow: "--color-psycho-shadow",

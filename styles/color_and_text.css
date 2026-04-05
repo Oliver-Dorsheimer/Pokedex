@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+body {
+    color: var(--color-text-neutral);
+}
+
 :root{
 
     --color-background-tint1: rgba(26,34,43,1);
