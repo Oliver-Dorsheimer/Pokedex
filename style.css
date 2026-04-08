@@ -139,13 +139,73 @@ main {
     border-radius: 8px;
 }
 
-#dialog_large_pokemon_card{
-    padding: 64px;
-    margin: auto;
+#large_pokemon_card_container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background-color: rgba(245, 245, 220, 0.3);
 }
 
-#dialog_large_pokemon_card::backdrop{
-    background-color: rgba(245, 245, 220, 0.2);
+#large_pokemon_card{
+    position: fixed;
+    top: 20%;
+    left: calc(50% - 250px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.large_pokemon_card_image_container_top{
+    position: absolute;
+    top: -200px;
+    height: 200px;
+    width: 460px;
+
+    border-top-left-radius: 200%;
+    background-color: rgb(0, 0, 255);
+}
+
+.large_pokemon_card_image_container{
+    position: absolute;
+    left: calc(50% - 112px);
+    bottom: -14px;
+    transform: rotate(45deg);
+    display: flex;
+    height: 224px;
+    width: 224px;
+
+    background-color: red;
+    border-style: solid;
+    border-color: var(--color-accent);
+    border-radius: 16%;
+}
+
+.large_pokemon_card_header{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 129.83px;
+    width: 460px;
+    background-color: rgba(99, 60, 8, 1);
+}
+
+.large_pokemon_card_main{
+    height: 400px;
+    width: 500px;
+
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    corner-shape: scoop;
+}
+
+.Dnone{
+    display: none;
 }
 
 @media(max-width: 380px){

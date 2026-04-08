@@ -19,22 +19,22 @@ function pokemonOverviewCardTemplate(index, colorDataIndex){
 `};
 
 function pokemonLargeCardTemplate(index, colorDataIndex){
-    return `<article id = "article_overview_card" style = "
-        background-color: var(${typeColors[colorDataIndex].primary});
-        border-color: var(${typeColors[colorDataIndex].accent});
-        ">
-        <header onclick = "clickProtection(event)">
+    return `<article id = "large_pokemon_card" onclick = "clickProtection(event)">
+        <section class = "large_pokemon_card_header" onclick = "clickProtection(event)">
+            <div class = "large_pokemon_card_image_container_top">
 
-        </header>
-        <section onclick = "clickProtection(event)">
-            <div class = "overview_card_image_container" style = "
+            </div>
+            <div class = "large_pokemon_card_image_container" style = "
                 background-color: var(${typeColors[colorDataIndex].tint});
                 ">
                 <img class = "overview_card_image" src = "${allPokemonDetailData[index].sprites.other['official-artwork'].front_default}">
             </div>
         </section>
-        <footer onclick = "clickProtection(event)">
-
-        </footer>
+        <section class = "large_pokemon_card_main" onclick = "clickProtection(event)" style = "
+        background-color: var(${typeColors[colorDataIndex].primary});
+        border-color: var(${typeColors[colorDataIndex].accent});
+        ">
+            
+        </section>
     </article>
 `};

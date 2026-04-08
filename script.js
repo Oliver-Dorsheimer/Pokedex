@@ -31,13 +31,13 @@ function openLargePokemonCard(index){
     let getPokemonTypes = allPokemonDetailData[index];
     let primaryType = getPokemonTypes.types[0].type.name;
     let colorDataIndex = typeColors.findIndex(typeColorData => typeColorData.type == primaryType);
-    document.getElementById("dialog_large_pokemon_card").innerHTML = pokemonLargeCardTemplate(index, colorDataIndex);
-    document.getElementById("dialog_large_pokemon_card").showModal();
+    document.getElementById("large_pokemon_card_container").innerHTML = pokemonLargeCardTemplate(index, colorDataIndex);
+    document.getElementById("large_pokemon_card_container").classList.remove("Dnone");
 };
 
 function closeLargePokemonCard(index){
     console.log("closing pokemon card",index);
-    document.getElementById("dialog_large_pokemon_card").close();
+    document.getElementById("large_pokemon_card_container").classList.add("Dnone");
 };
 
 function clickProtection(event){
