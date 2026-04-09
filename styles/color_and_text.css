@@ -30,7 +30,7 @@ body {
     --color-accent-tint1: rgba(255,204,51,1);
     --color-accent-tint2: rgba(255,223,102,1);
     --color-accent: rgba(255, 184, 0, 1);
-    --color-accent-shade1: rgba(230,161,0,1);
+    --color-accent-shade1: rgba(large_pokemon_card_close_button230,161,0,1);
     --color-accent-shade2: rgba(179,125,0,1);
 
     --color-warning: rgba(255, 90, 26, 1);
@@ -141,4 +141,9 @@ h1{
 h2{
     text-align: center;
     margin-top: 15%;
+}
+
+h3{
+    font-size: 24px;
+    margin-top: 48px;
 }

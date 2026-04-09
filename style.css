@@ -145,13 +145,13 @@ main {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1;
+    z-index: 10;
     background-color: rgba(245, 245, 220, 0.3);
 }
 
 #large_pokemon_card{
     position: fixed;
-    top: 20%;
+    top: 40%;
     left: calc(50% - 250px);
     display: flex;
     justify-content: center;
@@ -160,20 +160,27 @@ main {
 
 }
 
-.large_pokemon_card_image_container_top{
+.large_pokemon_card_header{
     position: absolute;
-    top: -200px;
-    height: 200px;
-    width: 460px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -250px;
+    height: 400px;
+    width: 400px;
 
-    border-top-left-radius: 200%;
-    background-color: rgb(0, 0, 255);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10% 70% 50% 30% / 10% 30% 0% 70%;
+    corner-shape: scoop round round round;
+    transform: rotate(45deg);
 }
 
 .large_pokemon_card_image_container{
+    z-index: 3;
     position: absolute;
     left: calc(50% - 112px);
-    bottom: -14px;
+    bottom: 347.195px;
     transform: rotate(45deg);
     display: flex;
     height: 224px;
@@ -185,23 +192,91 @@ main {
     border-radius: 16%;
 }
 
-.large_pokemon_card_header{
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 129.83px;
-    width: 460px;
-    background-color: rgba(99, 60, 8, 1);
-}
-
 .large_pokemon_card_main{
+    z-index: 2;
     height: 400px;
     width: 500px;
 
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
-    corner-shape: scoop;
+    anchor-name: --next;
+    anchor-name: --previous;
+
+    border-top-left-radius: 6% 120%;
+    border-top-right-radius: 6% 120%;
+    border-bottom-left-radius: 80px;
+    border-bottom-right-radius: 80px;
+    corner-shape: round round squircle squircle;
+    overflow: hidden;
+    background-color: rgba(99, 60, 8, 1);
+}
+
+.large_pokemon_card_main:hover{
+    transition-duration: 100ms;
+    corner-shape: round round scoop scoop;
+}
+
+.large_pokemon_card_main_top_content{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 48px;
+    padding-inline: 32px;
+}
+
+.large_pokemon_card_divide{
+    height: 2px;
+    width: 100%;
+    margin-block: 16px;
+    background-color: white;
+}
+
+.large_pokemon_card_main_middle_content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.large_pokemon_card_main_middle_top_info{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.large_pokemon_card_main_middle_middle_info{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin-top: 32px;
+}
+
+.large_pokemon_card_close_button{
+    height: 32px;
+    width: 32px;
+
+    background-color: var(--color-primary);
+    border-radius: 16px;
+}
+
+#large_pokemon_card_previous_button{
+    position: absolute;
+    left: -125px;
+    height: 64px;
+    width: 64px;
+
+    background-color: lightcoral;
+    border-radius: 32px;
+    
+}
+
+#large_pokemon_card_next_button{
+    position: absolute;
+    right: -125px;
+    height: 64px;
+    width: 64px;
+
+    background-color: lightcoral;
+    border-radius: 32px;
+
 }
 
 .Dnone{

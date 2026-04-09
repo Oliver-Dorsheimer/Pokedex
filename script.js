@@ -27,13 +27,24 @@ async function init(){
 };
 
 function openLargePokemonCard(index){
-    console.log("opening pokemon card",index);
+    if (index < 0){
+        return;
+    };
+    if (index > allPokemonMetaData.length){
+        return;
+    };
+
     let getPokemonTypes = allPokemonDetailData[index];
     let primaryType = getPokemonTypes.types[0].type.name;
     let colorDataIndex = typeColors.findIndex(typeColorData => typeColorData.type == primaryType);
     document.getElementById("large_pokemon_card_container").innerHTML = pokemonLargeCardTemplate(index, colorDataIndex);
     document.getElementById("large_pokemon_card_container").classList.remove("Dnone");
 };
+
+async function changeLargePokemonCard(index){
+    await getPokemonDetailData(index);
+    openLargePokemonCard(index);
+}
 
 function closeLargePokemonCard(index){
     console.log("closing pokemon card",index);

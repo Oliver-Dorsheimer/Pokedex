@@ -20,21 +20,45 @@ function pokemonOverviewCardTemplate(index, colorDataIndex){
 
 function pokemonLargeCardTemplate(index, colorDataIndex){
     return `<article id = "large_pokemon_card" onclick = "clickProtection(event)">
-        <section class = "large_pokemon_card_header" onclick = "clickProtection(event)">
-            <div class = "large_pokemon_card_image_container_top">
-
-            </div>
-            <div class = "large_pokemon_card_image_container" style = "
-                background-color: var(${typeColors[colorDataIndex].tint});
-                ">
-                <img class = "overview_card_image" src = "${allPokemonDetailData[index].sprites.other['official-artwork'].front_default}">
-            </div>
-        </section>
-        <section class = "large_pokemon_card_main" onclick = "clickProtection(event)" style = "
+        <button id = "large_pokemon_card_previous_button" onclick = "changeLargePokemonCard(${index-1})">previous</button>
+        <div class = "large_pokemon_card_image_container" style = "
+            background-color: var(${typeColors[colorDataIndex].tint});
+            ">
+            <img class = "overview_card_image" src = "${allPokemonDetailData[index].sprites.other['official-artwork'].front_default}">
+        </div>
+        <section class = "large_pokemon_card_header" onclick = "clickProtection(event)" style = "
         background-color: var(${typeColors[colorDataIndex].primary});
         border-color: var(${typeColors[colorDataIndex].accent});
         ">
             
         </section>
+        <section class = "large_pokemon_card_main" onclick = "clickProtection(event)">
+            <section class = "large_pokemon_card_main_top_content">
+                <p>ID:${allPokemonDetailData[index].id}</p>
+                <h3>${getPokemonName(index)}</h3>
+                <button class = "large_pokemon_card_close_button" onclick = "closeLargePokemonCard()">X</button>
+            </section>
+            <section class = "large_pokemon_card_main_middle_content">
+                <div class = "large_pokemon_card_divide"></div>
+                <div class = "large_pokemon_card_main_middle_top_info">
+                    <p>Height</p>
+                    <p>Weight</p>
+                </div>
+                <div  class = "large_pokemon_card_main_middle_middle_info">
+                    <div>
+                        <p>HP:</p>
+                        <p>Attack:</p>
+                        <p>Defense:</p>
+                    </div>
+                    <div>
+                        <p>Speed:</p>
+                        <p>Special Attack:</p>
+                        <p>Special Defense:</p>
+                    </div>
+                </div>
+                <div class = "large_pokemon_card_divide"></div>
+            </section>
+        </section>
+        <button id = "large_pokemon_card_next_button" onclick = "changeLargePokemonCard(${index+1})">next</button>
     </article>
 `};
