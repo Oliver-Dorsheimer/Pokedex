@@ -126,3 +126,18 @@ let typeColors = [
     accent: "--color-fee-accent"
 }
 ]
+
+let renderingModes = [
+    {
+        Name: "default",
+        isActive: true,
+        HTMLMark: "D",
+        HTMLElementID: "section_pokemon_overview",
+    },
+    {
+        Name: "search",
+        isActive: false,
+        HTMLMark: "S",
+        HTMLElementID: "section_pokemon_search_overview",
+    }
+]

@@ -1,10 +1,10 @@
-function pokemonOverviewCardTemplate(index, colorDataIndex){
-    return `<article id = "article_overview_card" style = "
-        background-color: var(${typeColors[colorDataIndex].primary});
-        border-color: var(${typeColors[colorDataIndex].accent});
+function pokemonOverviewCardTemplate(index, indexInColorDataJSON, renderingMode){
+    return `<article id = "article_overview_card_${index + "_" + renderingMode} " class = "article_overview_card" style = "
+        background-color: var(${typeColors[indexInColorDataJSON].primary});
+        border-color: var(${typeColors[indexInColorDataJSON].accent});
         ">
         <div class = "overview_card_image_container" style = "
-            background-color: var(${typeColors[colorDataIndex].tint});
+            background-color: var(${typeColors[indexInColorDataJSON].tint});
             ">
             <img class = "overview_card_image" src = "${allPokemonDetailData[index].sprites.other['official-artwork'].front_default}">
         </div>
@@ -18,17 +18,17 @@ function pokemonOverviewCardTemplate(index, colorDataIndex){
     </article>
 `};
 
-function pokemonLargeCardTemplate(index, colorDataIndex){
+function pokemonLargeCardTemplate(index, indexInColorDataJSON){
     return `<article id = "large_pokemon_card" onclick = "clickProtection(event)">
         <button id = "large_pokemon_card_previous_button" onclick = "changeLargePokemonCard(${index-1})">previous</button>
         <div class = "large_pokemon_card_image_container" style = "
-            background-color: var(${typeColors[colorDataIndex].tint});
+            background-color: var(${typeColors[indexInColorDataJSON].tint});
             ">
             <img class = "overview_card_image" src = "${allPokemonDetailData[index].sprites.other['official-artwork'].front_default}">
         </div>
         <section class = "large_pokemon_card_header" onclick = "clickProtection(event)" style = "
-        background-color: var(${typeColors[colorDataIndex].primary});
-        border-color: var(${typeColors[colorDataIndex].accent});
+        background-color: var(${typeColors[indexInColorDataJSON].primary});
+        border-color: var(${typeColors[indexInColorDataJSON].accent});
         ">
             
         </section>
@@ -41,19 +41,19 @@ function pokemonLargeCardTemplate(index, colorDataIndex){
             <section class = "large_pokemon_card_main_middle_content">
                 <div class = "large_pokemon_card_divide"></div>
                 <div class = "large_pokemon_card_main_middle_top_info">
-                    <p>Height</p>
-                    <p>Weight</p>
+                    <p>Height: ${allPokemonDetailData[index].stats[0].base_stat}</p>
+                    <p>Weight: ${allPokemonDetailData[index].weight}</p>
                 </div>
                 <div  class = "large_pokemon_card_main_middle_middle_info">
                     <div>
-                        <p>HP:</p>
-                        <p>Attack:</p>
-                        <p>Defense:</p>
+                        <p>HP: ${allPokemonDetailData[index].stats[0].base_stat}</p>
+                        <p>Attack: ${allPokemonDetailData[index].stats[1].base_stat}</p>
+                        <p>Defense: ${allPokemonDetailData[index].stats[2].base_stat}</p>
                     </div>
                     <div>
-                        <p>Speed:</p>
-                        <p>Special Attack:</p>
-                        <p>Special Defense:</p>
+                        <p>Speed: ${allPokemonDetailData[index].stats[5].base_stat}</p>
+                        <p>Special Attack: ${allPokemonDetailData[index].stats[3].base_stat}</p>
+                        <p>Special Defense: ${allPokemonDetailData[index].stats[4].base_stat}</p>
                     </div>
                 </div>
                 <div class = "large_pokemon_card_divide"></div>

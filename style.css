@@ -51,6 +51,8 @@ main {
     justify-content: center;
     flex-wrap: wrap;
     background-color: var(--color-cards);
+
+    min-height: 85vh;
 }
 
 .main_content{
@@ -62,7 +64,7 @@ main {
     margin-top: 64px;
 }
 
-#section_pokemon_overview{
+.section_overview_styling{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -71,7 +73,7 @@ main {
     width: 100%;
 }
 
-#article_overview_card{
+.article_overview_card{
     position: relative;
     height: 300px;
     width: 300px;

@@ -2,19 +2,17 @@
 let allPokemonMetaData = new Array(1350).fill(null);
 let allPokemonDetailData = new Array(1350).fill(null);
 
-let PokemondatailDataChache = new Array(20).fill(null);
+let renderedSearchElementsList = new Array(1350).fill(false);
+let searchHitsPokemonMetaData = [];
 
+let defaultRenderingMode = renderingModes[0];
+let searchRenderingMode = renderingModes[1];
 let renderingBatchSize = 20;
 let renderingSection = 0;
 let loadingSection = 0;
 let loadingBatchSize = 4;
 
 //#endregion
-//#region Main
-
-
-//#endregion
-//#region Functions
 
 async function init(){
     
@@ -23,7 +21,7 @@ async function init(){
     loadPokemonDetailsDataBatch();
     console.log(allPokemonMetaData);
     console.log(allPokemonDetailData);
-    renderPokemonOverviewBatch();
+    renderPokemonOverviewBatch("normal");
 };
 
 function openLargePokemonCard(index){
@@ -36,18 +34,17 @@ function openLargePokemonCard(index){
 
     let getPokemonTypes = allPokemonDetailData[index];
     let primaryType = getPokemonTypes.types[0].type.name;
-    let colorDataIndex = typeColors.findIndex(typeColorData => typeColorData.type == primaryType);
-    document.getElementById("large_pokemon_card_container").innerHTML = pokemonLargeCardTemplate(index, colorDataIndex);
+    let indexInColorDataJSON = typeColors.findIndex(typeColorData => typeColorData.type == primaryType);
+    document.getElementById("large_pokemon_card_container").innerHTML = pokemonLargeCardTemplate(index, indexInColorDataJSON);
     document.getElementById("large_pokemon_card_container").classList.remove("Dnone");
 };
 
 async function changeLargePokemonCard(index){
     await getPokemonDetailData(index);
     openLargePokemonCard(index);
-}
+};
 
 function closeLargePokemonCard(index){
-    console.log("closing pokemon card",index);
     document.getElementById("large_pokemon_card_container").classList.add("Dnone");
 };
 
@@ -55,31 +52,99 @@ function clickProtection(event){
     event.stopPropagation();
 };
 
-function loadMorePokemon(){
-    if(!isBatchLoaded()){
+//#region Search Functionality
+
+function changeRenderModeToSearch(){
+    let length = document.getElementById("header_searchbar").value.length;
+    if(length < 4){
+        if(!renderingModes[0].isActive){
+            setRenderingModeTo("default")
+            toggleElementsVisibility();
+            //add dnone to all seach elements
+        }
+        return;
+    };
+    
+    setRenderingModeTo("search");
+};
+
+function setRenderingModeTo(modeName){
+    let modeIndex = getModeIndex(modeName);
+    renderingModes[modeIndex].
+    renderingModes.array.forEach(element => {
+        if (element.name == modeName){
+            element.isActive = true;
+            toggleElementsVisibility(index)
+        }else{
+            element.isActive = false;
+        };
+
+    });
+
+    if(length < 4){
+        if(searchRenderingMode.isActive){
+            searchRenderingMode.isActive = false;
+            defaultRenderingMode.isActive = true;
+            toggleNormalElementsVisibility();
+            //add dnone to all seach elements
+        };
         return;
     };
 
-    loadPokemonDetailsDataBatch();
-    renderPokemonOverviewBatch();
-    console.log(allPokemonDetailData);
+    searchRenderingMode.isActive = true;
+    defaultRenderingMode.isActive = false;
+    toggleNormalElementsVisibility();
+    //set dnone to all rendered search elements that dont match any search hits
+    funkyname();
+    //check if search hit elemnts ist already rendered. if (rendered) unset dnone, else get detail data and render search element
+    getMatchingPokemonsByName(document.getElementById("header_searchbar").value);
+    console.log(searchHitsPokemonMetaData);
 };
 
-function isBatchLoaded(){
-    if(allPokemonDetailData[renderingBatchSize * loadingSection - 1] !== null){
-        return true;
+function getModeIndex(modeName){
+    renderingModes.forEach(element =>{
+        if (element.name == modeName){
+            return index;
+        };
+    });
+};
+
+function toggleElementsVisibility(){
+    if (defaultRenderingMode.isActive){
+        document.getElementById("section_pokemon_overview").classList.remove("Dnone");
+    }else{
+        document.getElementById("section_pokemon_overview").classList.add("Dnone");
     };
 };
 
-//#region Rendering
+function getMatchingPokemonsByName(name){
+    let indexOfMatchingPokemons = [];
+    let lowerCaseName = name.toLowerCase();
+    for(let i = 0; i < allPokemonMetaData.results.length; i++){
+        if(allPokemonMetaData.results[i].name != null && allPokemonMetaData.results[i].name.includes(lowerCaseName)){
+            indexOfMatchingPokemons.push(i);
+        };
+    };
+    searchHitsPokemonMetaData = indexOfMatchingPokemons;
+};
 
-async function renderPokemonOverviewBatch(){
+//#endregion
+//#region Overview Rendering
+
+async function renderSearchElements(renderingMode){
+    for (let i = 0; i < renderingBatchSize; i++){
+        let primaryType = getPrimaryType(renderingSection * renderingBatchSize + i);
+        let indexInColorDataJSON = typeColors.findIndex(typeColorData => typeColorData.type == primaryType);
+        await renderOverviewCard(i, indexInColorDataJSON, renderingMode);
+    };
+};
+
+async function renderPokemonOverviewBatch(renderingMode){
     try{
         for (let i = 0; i < renderingBatchSize; i++){
-        let getPokemonTypes = allPokemonDetailData[renderingSection * renderingBatchSize + i];
-        let primaryType = getPokemonTypes.types[0].type.name;
-        let colorDataIndex = typeColors.findIndex(typeColorData => typeColorData.type == primaryType);
-        await renderOverviewCard(i, colorDataIndex);
+        let primaryType = getPrimaryType(renderingSection * renderingBatchSize + i);
+        let indexInColorDataJSON = typeColors.findIndex(typeColorData => typeColorData.type == primaryType);
+        await renderOverviewCard(i, indexInColorDataJSON, renderingMode);
     };
     renderingSection++
     } catch (error){
@@ -87,13 +152,35 @@ async function renderPokemonOverviewBatch(){
     };
 };
 
-async function renderOverviewCard(index, colorDataIndex){
-    document.getElementById("section_pokemon_overview").innerHTML += pokemonOverviewCardTemplate(renderingBatchSize * renderingSection + index, colorDataIndex);
+function getPrimaryType(index){
+    return allPokemonDetailData[index].types[0].type.name;
+};
+
+async function renderOverviewCard(index, indexInColorDataJSON, renderingMode){
+    document.getElementById("section_pokemon_overview").innerHTML += pokemonOverviewCardTemplate(renderingBatchSize * renderingSection + index, indexInColorDataJSON, renderingMode);
 };
 
 function getPokemonName(index){
     let name = allPokemonMetaData.results[index].name;
     return name.toUpperCase();
+};
+
+function loadMorePokemon(renderingMode){
+    if(!isBatchLoaded() || defaultRenderingMode.isActive == false){
+        return;
+    };
+
+    loadPokemonDetailsDataBatch();
+    renderPokemonOverviewBatch(renderingMode);
+    console.log(allPokemonDetailData);
+};
+
+function isBatchLoaded(){
+    if(allPokemonDetailData[renderingBatchSize * loadingSection - 1] == null || allPokemonDetailData[renderingBatchSize * loadingSection - 1] == undefined){
+        return false;
+    }else{
+        return true;
+    };
 };
 
 //#endregion
@@ -140,25 +227,6 @@ async function getPokemonDetailData(index){
 };
 
 //#endregion
-//#endregion
 
 
-/*overscroll-behaviour: contain;
-try {
-        let globalIndex = renderingBatchSize * renderingSection;
-        let promises = [];
-        for (let i = 0; i < renderingBatchSize/loadingBatchSize; i++){
-            await Promise.allSettled([getPokemonDetailData(globalIndex), getPokemonDetailData(globalIndex + 1), getPokemonDetailData(globalIndex + 2), getPokemonDetailData(globalIndex + 3)]);
-            globalIndex = globalIndex + loadingBatchSize;
-        };
-        if(renderingBatchSize%loadingBatchSize >= 0){
-            for (let i = 0; i < renderingBatchSize/loadingBatchSize; i++){
-            const globalIndex = renderingBatchSize * renderingSection + i;
-            await getPokemonDetailData(globalIndex);
-            };
-        };
-        loadingSection++
-    } catch (error) {
-       console.warn("Pokemon Datails Data could not be loaded !");
-    };
-*/
+/*overscroll-behaviour: contain;*/
