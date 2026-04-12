@@ -5,10 +5,9 @@ let allPokemonDetailData = new Array(1350).fill(null);
 let renderedSearchElementsList = new Array(1350).fill(false);
 let searchHitsPokemonMetaData = [];
 
-let defaultRenderingMode = renderingModes[0];
-let searchRenderingMode = renderingModes[1];
+let defaultRenderingMode = renderingModesData[0];
+let searchRenderingMode = renderingModesData[1];
 let renderingBatchSize = 20;
-let renderingSection = 0;
 let loadingSection = 0;
 let loadingBatchSize = 4;
 
@@ -21,7 +20,9 @@ async function init(){
     loadPokemonDetailsDataBatch();
     console.log(allPokemonMetaData);
     console.log(allPokemonDetailData);
-    renderPokemonOverviewBatch("normal");
+    console.log(getCurrentRenderingModeData())
+    renderPokemonOverviewBatch("default");
+    
 };
 
 function openLargePokemonCard(index){
@@ -54,74 +55,44 @@ function clickProtection(event){
 
 //#region Search Functionality
 
-function changeRenderModeToSearch(){
+function isSearchUsed(){
     let length = document.getElementById("header_searchbar").value.length;
     if(length < 4){
-        if(!renderingModes[0].isActive){
-            setRenderingModeTo("default")
-            toggleElementsVisibility();
+        if(renderingModesData[1].isActive){
+            setRenderingModeTo("default");
             //add dnone to all seach elements
-        }
+        };
         return;
     };
-    
     setRenderingModeTo("search");
 };
 
 function setRenderingModeTo(modeName){
-    let modeIndex = getModeIndex(modeName);
-    renderingModes[modeIndex].
-    renderingModes.array.forEach(element => {
-        if (element.name == modeName){
-            element.isActive = true;
-            toggleElementsVisibility(index)
+    renderingModesData.forEach(modeElement => {
+        if(modeElement.name == modeName){
+            modeElement.isActive = true;
         }else{
-            element.isActive = false;
-        };
-
-    });
-
-    if(length < 4){
-        if(searchRenderingMode.isActive){
-            searchRenderingMode.isActive = false;
-            defaultRenderingMode.isActive = true;
-            toggleNormalElementsVisibility();
-            //add dnone to all seach elements
-        };
-        return;
-    };
-
-    searchRenderingMode.isActive = true;
-    defaultRenderingMode.isActive = false;
-    toggleNormalElementsVisibility();
-    //set dnone to all rendered search elements that dont match any search hits
-    funkyname();
-    //check if search hit elemnts ist already rendered. if (rendered) unset dnone, else get detail data and render search element
-    getMatchingPokemonsByName(document.getElementById("header_searchbar").value);
-    console.log(searchHitsPokemonMetaData);
-};
-
-function getModeIndex(modeName){
-    renderingModes.forEach(element =>{
-        if (element.name == modeName){
-            return index;
+            modeElement.isActive = false;
         };
     });
+    refreshElementsVisibility();
 };
 
-function toggleElementsVisibility(){
-    if (defaultRenderingMode.isActive){
-        document.getElementById("section_pokemon_overview").classList.remove("Dnone");
-    }else{
-        document.getElementById("section_pokemon_overview").classList.add("Dnone");
-    };
+function refreshElementsVisibility(){
+    renderingModesData.forEach(modeElement => {
+        if(modeElement.isActive == true){
+            document.getElementById(modeElement.HTMLSectionElementID).classList.remove("Dnone");
+        }else {
+            document.getElementById(modeElement.HTMLSectionElementID).classList.add("Dnone");
+        };
+    })
 };
 
 function getMatchingPokemonsByName(name){
     let indexOfMatchingPokemons = [];
     let lowerCaseName = name.toLowerCase();
-    for(let i = 0; i < allPokemonMetaData.results.length; i++){
-        if(allPokemonMetaData.results[i].name != null && allPokemonMetaData.results[i].name.includes(lowerCaseName)){
+    for(let i = 0; i < allPokemonMetaData.length; i++){
+        if(allPokemonMetaData[i].name != null && allPokemonMetaData[i].name.includes(lowerCaseName)){
             indexOfMatchingPokemons.push(i);
         };
     };
@@ -141,14 +112,23 @@ async function renderSearchElements(renderingMode){
 
 async function renderPokemonOverviewBatch(renderingMode){
     try{
+        let currentRenderingMode = getCurrentRenderingModeData();
         for (let i = 0; i < renderingBatchSize; i++){
-        let primaryType = getPrimaryType(renderingSection * renderingBatchSize + i);
+        let primaryType = getPrimaryType(currentRenderingMode.renderingSection * renderingBatchSize + i);
         let indexInColorDataJSON = typeColors.findIndex(typeColorData => typeColorData.type == primaryType);
-        await renderOverviewCard(i, indexInColorDataJSON, renderingMode);
+        await renderOverviewCard(i, indexInColorDataJSON, currentRenderingMode.HTMLSectionElementID, currentRenderingMode.renderingSection, currentRenderingMode.HTMLMark);
     };
-    renderingSection++
+    currentRenderingMode.renderingSection++
     } catch (error){
         console.warn("Error rendering Overview Batch");
+    };
+};
+
+function getCurrentRenderingModeData(){
+    for(let i = 0; i < renderingModesData.length; i++){
+        if(renderingModesData[i].isActive){
+            return renderingModesData[i];
+        };
     };
 };
 
@@ -156,22 +136,23 @@ function getPrimaryType(index){
     return allPokemonDetailData[index].types[0].type.name;
 };
 
-async function renderOverviewCard(index, indexInColorDataJSON, renderingMode){
-    document.getElementById("section_pokemon_overview").innerHTML += pokemonOverviewCardTemplate(renderingBatchSize * renderingSection + index, indexInColorDataJSON, renderingMode);
+async function renderOverviewCard(index, indexInColorDataJSON, HTMLSectionElementID, currentRenderingSection, currentRenderingModeName){
+    document.getElementById(HTMLSectionElementID).innerHTML += pokemonOverviewCardTemplate(renderingBatchSize * currentRenderingSection + index, indexInColorDataJSON, currentRenderingModeName);
 };
 
 function getPokemonName(index){
-    let name = allPokemonMetaData.results[index].name;
+    let name = allPokemonMetaData[index].name;
     return name.toUpperCase();
 };
 
-function loadMorePokemon(renderingMode){
+function loadMorePokemon(){
+    let currentRenderingMode = getCurrentRenderingModeData().name;
     if(!isBatchLoaded() || defaultRenderingMode.isActive == false){
         return;
     };
 
     loadPokemonDetailsDataBatch();
-    renderPokemonOverviewBatch(renderingMode);
+    renderPokemonOverviewBatch();
     console.log(allPokemonDetailData);
 };
 
@@ -190,7 +171,7 @@ async function setAllPokemonMetaData(){
     try {
         let allPokemonData =  await fetch("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10000");
         let allPokemonMetaDataJSON =  await allPokemonData.json();
-        allPokemonMetaData = allPokemonMetaDataJSON;
+        allPokemonMetaData = allPokemonMetaDataJSON.results;
     } catch (error) {
        console.warn("failed to load pokemon meta data");
     };
@@ -217,7 +198,7 @@ async function getPokemonDetailData(index){
             return
         };
         
-        let allPokemonDetails =  await fetch(allPokemonMetaData.results[index].url);
+        let allPokemonDetails =  await fetch(allPokemonMetaData[index].url);
         let allPokemonDetailDataJSON =  await allPokemonDetails.json();
         allPokemonDetailData[index] = allPokemonDetailDataJSON;
         

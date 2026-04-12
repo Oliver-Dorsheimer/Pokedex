@@ -127,17 +127,21 @@ let typeColors = [
 }
 ]
 
-let renderingModes = [
+let renderingModesData = [
     {
-        Name: "default",
+        name: "default",
         isActive: true,
+        renderingSection: 0,
+        renderedElements: [],
         HTMLMark: "D",
-        HTMLElementID: "section_pokemon_overview",
+        HTMLSectionElementID: "section_pokemon_overview",
     },
     {
-        Name: "search",
+        name: "search",
         isActive: false,
+        renderingSection: 0,
+        renderedElements: [],
         HTMLMark: "S",
-        HTMLElementID: "section_pokemon_search_overview",
+        HTMLSectionElementID: "section_pokemon_search_overview",
     }
 ]
