@@ -17,7 +17,7 @@
                 <img src="assets/icon/pokeball_icon.png">
                 <h1>Pokedex</h1>
             </div>
-            <input id = "header_searchbar" onchange = "isSearchUsed()">
+            <input id = "header_searchbar" onchange = "checkIsSearchUsed()">
         </div>
         <div id = "large_pokemon_card_container" class = "Dnone" onclick="closeLargePokemonCard()">
             
@@ -33,7 +33,7 @@
 
                 
             </section>
-            <button id = "pokemon_overview_button_load_more" onclick = "loadMorePokemon('default')">load more</button>
+            <button id = "pokemon_overview_button_load_more" onclick = "showNextSection('default')">load more</button>
         </div>
     </main>
     

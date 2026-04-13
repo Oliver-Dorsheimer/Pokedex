@@ -1,15 +1,13 @@
 //#region variables
 let allPokemonMetaData = new Array(1350).fill(null);
 let allPokemonDetailData = new Array(1350).fill(null);
-
-let renderedSearchElementsList = new Array(1350).fill(false);
-let searchHitsPokemonMetaData = [];
-
-let defaultRenderingMode = renderingModesData[0];
-let searchRenderingMode = renderingModesData[1];
+let renderedSectionElementsList = new Array(1350).fill(false);
 let renderingBatchSize = 20;
 let loadingSection = 0;
 let loadingBatchSize = 4;
+
+let renderedSearchElementsList = new Array(1350).fill(false);
+let searchHitsPokemonMetaData = [];
 
 //#endregion
 
@@ -21,8 +19,8 @@ async function init(){
     console.log(allPokemonMetaData);
     console.log(allPokemonDetailData);
     console.log(getCurrentRenderingModeData())
-    renderPokemonOverviewBatch("default");
-    
+    renderBySections("default");
+    console.log(renderedSectionElementsList);
 };
 
 function openLargePokemonCard(index){
@@ -37,7 +35,7 @@ function openLargePokemonCard(index){
     let primaryType = getPokemonTypes.types[0].type.name;
     let indexInColorDataJSON = typeColors.findIndex(typeColorData => typeColorData.type == primaryType);
     document.getElementById("large_pokemon_card_container").innerHTML = pokemonLargeCardTemplate(index, indexInColorDataJSON);
-    document.getElementById("large_pokemon_card_container").classList.remove("Dnone");
+    document.getElementById("large_pokemon_card_container").classList.remove("bigDnone");
 };
 
 async function changeLargePokemonCard(index){
@@ -46,7 +44,7 @@ async function changeLargePokemonCard(index){
 };
 
 function closeLargePokemonCard(index){
-    document.getElementById("large_pokemon_card_container").classList.add("Dnone");
+    document.getElementById("large_pokemon_card_container").classList.add("bigDnone");
 };
 
 function clickProtection(event){
@@ -55,7 +53,7 @@ function clickProtection(event){
 
 //#region Search Functionality
 
-function isSearchUsed(){
+function checkIsSearchUsed(){
     let length = document.getElementById("header_searchbar").value.length;
     if(length < 4){
         if(renderingModesData[1].isActive){
@@ -75,15 +73,15 @@ function setRenderingModeTo(modeName){
             modeElement.isActive = false;
         };
     });
-    refreshElementsVisibility();
+    refreshSectionVisibility();
 };
 
-function refreshElementsVisibility(){
+function refreshSectionVisibility(){
     renderingModesData.forEach(modeElement => {
         if(modeElement.isActive == true){
-            document.getElementById(modeElement.HTMLSectionElementID).classList.remove("Dnone");
+            document.getElementById(modeElement.HTMLSectionElementID).classList.remove("bigDnone");
         }else {
-            document.getElementById(modeElement.HTMLSectionElementID).classList.add("Dnone");
+            document.getElementById(modeElement.HTMLSectionElementID).classList.add("bigDnone");
         };
     })
 };
@@ -101,8 +99,18 @@ function getMatchingPokemonsByName(name){
 
 //#endregion
 //#region Overview Rendering
+function showNextSection(){
+    let currentRenderingMode = getCurrentRenderingModeData();
+    for(let i = 0; i < currentRenderingMode.renderingSection * renderingBatchSize + i; i++){
+        document.getElementById(`article_overview_card_${currentRenderingMode.HTMLMark + "_" + i}`).classList.remove("bigDnone");
+    };
+};
 
-async function renderSearchElements(renderingMode){
+function selectRenderingFunction(){
+    getCurrentRenderingModeData().name
+};
+
+async function renderIndividualElements(renderingMode){
     for (let i = 0; i < renderingBatchSize; i++){
         let primaryType = getPrimaryType(renderingSection * renderingBatchSize + i);
         let indexInColorDataJSON = typeColors.findIndex(typeColorData => typeColorData.type == primaryType);
@@ -110,17 +118,18 @@ async function renderSearchElements(renderingMode){
     };
 };
 
-async function renderPokemonOverviewBatch(renderingMode){
+async function renderBySections(){
     try{
         let currentRenderingMode = getCurrentRenderingModeData();
         for (let i = 0; i < renderingBatchSize; i++){
         let primaryType = getPrimaryType(currentRenderingMode.renderingSection * renderingBatchSize + i);
         let indexInColorDataJSON = typeColors.findIndex(typeColorData => typeColorData.type == primaryType);
         await renderOverviewCard(i, indexInColorDataJSON, currentRenderingMode.HTMLSectionElementID, currentRenderingMode.renderingSection, currentRenderingMode.HTMLMark);
+        renderedSectionElementsList[currentRenderingMode.renderingSection * renderingBatchSize + i] = true;
     };
     currentRenderingMode.renderingSection++
     } catch (error){
-        console.warn("Error rendering Overview Batch");
+        console.warn("Error rendering Section Batch");
     };
 };
 
@@ -147,13 +156,14 @@ function getPokemonName(index){
 
 function loadMorePokemon(){
     let currentRenderingMode = getCurrentRenderingModeData().name;
-    if(!isBatchLoaded() || defaultRenderingMode.isActive == false){
+    if(!isBatchLoaded()){
         return;
     };
 
     loadPokemonDetailsDataBatch();
-    renderPokemonOverviewBatch();
+    renderBySections();
     console.log(allPokemonDetailData);
+    console.log(renderedSectionElementsList);
 };
 
 function isBatchLoaded(){
