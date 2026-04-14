@@ -132,7 +132,6 @@ let renderingModesData = [
         name: "default",
         isActive: true,
         renderingSection: 0,
-        renderedElements: [],
         HTMLMark: "D",
         HTMLSectionElementID: "section_pokemon_overview",
     },
@@ -140,8 +139,7 @@ let renderingModesData = [
         name: "search",
         isActive: false,
         renderingSection: 0,
-        renderedElements: [],
-        HTMLMark: "S",
-        HTMLSectionElementID: "section_pokemon_search_overview",
+        HTMLMark: "D",
+        HTMLSectionElementID: "section_pokemon_overview",
     }
 ]

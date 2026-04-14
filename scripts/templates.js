@@ -1,5 +1,5 @@
 function pokemonOverviewCardTemplate(index, indexInColorDataJSON, renderingMode){
-    return `<article id = "article_overview_card_${renderingMode + "_" + index} " class = "article_overview_card bigDnone" style = "
+    return `<article id = "article_overview_card_${renderingMode + "_" + index}" class = "article_overview_card bigDnone" style = "
         background-color: var(${typeColors[indexInColorDataJSON].primary});
         border-color: var(${typeColors[indexInColorDataJSON].accent});
         ">
