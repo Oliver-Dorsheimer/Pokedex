@@ -63,7 +63,7 @@ let typeColors = [
     accent: "--color-boden-accent"
 },
 {
-    type: "fly",
+    type: "flying",
     tint: "--color-flug-tint",
     primary: "--color-flug-base",
     shadow: "--color-flug-shadow",

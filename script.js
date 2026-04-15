@@ -195,13 +195,16 @@ function getPokemonName(index){
     return name.toUpperCase();
 };
 
-function loadMorePokemon(){
+async function loadMorePokemon(){
     let currentRenderingMode = getCurrentRenderingModeData().name;
     if(!isBatchLoaded()){
+        console.log("API calls Lagging Behind !")
+        await cacheNextElements();
         return;
     };
     if(!isSectionRendered()){
-        console.log("Chaching Lagging Behind !")
+        console.log("Rendering Lagging Behind !")
+        await cacheNextElements();
         return;
     };
 
