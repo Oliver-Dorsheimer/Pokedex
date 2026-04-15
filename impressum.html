@@ -6,36 +6,42 @@
     <link rel="icon" href="assets/icon/pokeball_icon.png"/>
     <link rel="stylesheet" href="styles/color_and_text.css">
     <link rel="stylesheet" href="style.css">
-    <script defer src="scripts/db.js"></script>
-    <script defer src="scripts/templates.js"></script>
-    <script defer src="script.js"></script>
-    <title>Pokedex - Das Krasse !</title>
+    <title>Document</title>
 </head>
-<body onload = "init()">
+<body>
     <header>
         <div class = "header_content content_limitation margin-side">
             <div class = "header_content_left">
-                <img src="assets/icon/pokeball_icon.png">
+                <a href="index.html"><img src="assets/icon/pokeball_icon.png"></a>
                 <h1>Pokedex</h1>
             </div>
-            <input id = "header_searchbar" onkeydown = "checkIsSearchUsed()" onchange = "checkIsSearchUsed()">
         </div>
         <div id = "large_pokemon_card_container" class = "bigDnone" onclick="closeLargePokemonCard()">
             
         </div>
     </header>
-    <main id = "main_section">
-        <div class = "main_content margin-side content_limitation">
-            <section id = "section_pokemon_overview" class = "section_overview_styling">
-
-                
-            </section>
-            <section id = "section_pokemon_search_overview" class = "section_overview_styling bigDnone">
-
-                
-            </section>
-            <button id = "pokemon_overview_button_load_more" onclick = "loadMorePokemon()">load more</button>
-        </div>
+    <main>
+        <section class = "section_impressum">
+            <h1>Impressum</h1>
+            <table class = "impressum_table">
+                <tr>
+                    <td>Name: </td>
+                    <td>Oliver Dorsheimer</td>
+                </tr>
+                <tr>
+                    <td>Adresse: </td>
+                    <td>Musterstraße 111</td>
+                </tr>
+                <tr>
+                    <td>Adresszusatz: </td>
+                    <td>Gebäude 44</td>
+                </tr>
+                <tr>
+                    <td>Ort: </td>
+                    <td>90210 Musterstadt</td>
+                </tr>
+            </table>
+        </section>
     </main>
     <footer class = "footer_styling">
         <div class = "footer_content_container content_limitation margin-side">

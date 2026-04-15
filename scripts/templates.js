@@ -3,7 +3,7 @@ function pokemonOverviewCardTemplate(index, indexInColorDataJSON, renderingMode)
         background-color: var(${typeColors[indexInColorDataJSON].primary});
         border-color: var(${typeColors[indexInColorDataJSON].accent});
         ">
-        <div class = "overview_card_image_container" style = "
+        <div class = "overview_card_image_container" onclick = "openLargePokemonCard(${index})" style = "
             background-color: var(${typeColors[indexInColorDataJSON].tint});
             ">
             <img class = "overview_card_image" src = "${allPokemonDetailData[index].sprites.other['official-artwork'].front_default}">
