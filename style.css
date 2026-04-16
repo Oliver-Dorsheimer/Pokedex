@@ -55,7 +55,7 @@ main {
     flex-wrap: wrap;
     background-color: var(--color-cards);
 
-    min-height: 85vh;
+    min-height: 64vh;
 }
 
 .main_content{
@@ -82,6 +82,7 @@ main {
     width: 300px;
     margin-bottom: 128px;
 
+    cursor: pointer;
     transition-duration: 300ms;
     border-style: solid;
     border-width: 3px;
@@ -141,6 +142,7 @@ main {
     padding: 8px;
     
     background-color: var(--color-secondary-shade2);
+    border-color: var(--color-accent);
     color: var(--color-text-neutral);
     cursor: pointer;
     border-radius: 8px;
@@ -320,7 +322,7 @@ main {
 
 .footer_styling{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     min-height: 150px;
     padding-block: 64px;

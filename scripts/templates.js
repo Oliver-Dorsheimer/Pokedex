@@ -20,7 +20,7 @@ function pokemonOverviewCardTemplate(index, indexInColorDataJSON, renderingMode)
 
 function pokemonLargeCardTemplate(index, indexInColorDataJSON){
     return `<article id = "large_pokemon_card" onclick = "clickProtection(event)">
-        <button id = "large_pokemon_card_previous_button" onclick = "changeLargePokemonCard(${index-1})">previous</button>
+        <button id = "large_pokemon_card_previous_button" onclick = "changeLargePokemonCard(${index}, -1)">previous</button>
         <div class = "large_pokemon_card_image_container" style = "
             background-color: var(${typeColors[indexInColorDataJSON].tint});
             ">
@@ -59,6 +59,6 @@ function pokemonLargeCardTemplate(index, indexInColorDataJSON){
                 <div class = "large_pokemon_card_divide"></div>
             </section>
         </section>
-        <button id = "large_pokemon_card_next_button" onclick = "changeLargePokemonCard(${index+1})">next</button>
+        <button id = "large_pokemon_card_next_button" onclick = "changeLargePokemonCard(${index}, 1)">next</button>
     </article>
 `};
